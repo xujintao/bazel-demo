@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go-demo_lib",
+    srcs = ["hello.go"],
+    importpath = "github.com/xujintao/bazel-demo/src/go-demo",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//src/go-lib",
+        "@com_github_gin_gonic_gin//:gin",
+    ],
+)
+
+go_binary(
+    name = "go-demo",
+    embed = [":go-demo_lib"],
+    visibility = ["//visibility:public"],
+)
